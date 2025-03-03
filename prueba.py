@@ -1,4 +1,5 @@
 import json
+import pprint
 
 ''' con comillas dobles
 str_sentiment = "{'documentSentiment':{'score':0.996954, 'label':'SENT_POSITIVE', 'mixed':false, 'sentimentMentions':[{'span':{'begin':0, 'end':26, 'text':'I love this new technology'}, 'sentimentprob':{'positive':0.9941229, 'neutral':0.0028645627, 'negative':0.0030124863}}]}, 'targetedSentiments':{'targetedSentiments':{}, 'producerId':{'name':'Aggregated Sentiment Workflow', 'version':'0.0.1'}}, 'producerId':{'name':'Aggregated Sentiment Workflow', 'version':'0.0.1'}}"
@@ -37,5 +38,20 @@ print("All emotions in detail")
 for emo_key in json_emotions['emotionPredictions'][0]['emotion']:
     emo_value = json_emotions['emotionPredictions'][0]['emotion'][emo_key]
     print("Emotion: {0:8} - score: {1}".format(emo_key, emo_value))
+print("----------------------------------------")
+print("----------------------------------------")
+print("Dictionary with all the emotions in detail")
+dominant_emo = ""
+dict_emotions = {}
+max_value = 0
+for emo_key in json_emotions['emotionPredictions'][0]['emotion']:
+    emo_value = json_emotions['emotionPredictions'][0]['emotion'][emo_key]
+    dict_emotions.update({emo_key: emo_value})
+    if (emo_value > max_value):
+        max_value = emo_value
+        dominant_emo = emo_key
+dict_emotions.update({'dominant_emotion': dominant_emo})
+pprint.PrettyPrinter(5).pprint(dict_emotions)
+print(dict_emotions)
 print("----------------------------------------")
 print()

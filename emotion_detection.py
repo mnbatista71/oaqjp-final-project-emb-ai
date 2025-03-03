@@ -24,4 +24,3 @@ def emotion_detector(text_to_analyse):
 
     return response.text
 '''
-

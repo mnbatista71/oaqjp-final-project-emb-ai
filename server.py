@@ -1,4 +1,4 @@
-# TASK 7 - by Mariano Batista
+""" TASK 8 - by Mariano Batista """
 # Import Flask, render_template, request from the flask pramework package:
 from flask import Flask, render_template, request
 
@@ -8,6 +8,7 @@ from EmotionDetection.emotion_detection import emotion_detector
 #Initiate the flask app :
 app = Flask("Emotion Detector")
 
+# main page for Emotion Detector
 @app.route("/emotionDetector")
 def emo_detector():
     ''' This code receives the text from the HTML interface and runs emotion detection over it 
@@ -25,7 +26,7 @@ def emo_detector():
     # Pass the text to the sentiment_analyzer function and store the response
     dict_response = emotion_detector(text_to_analyze)
     str_response = ""
-    if dict_response['dominant_emotion'] == None:
+    if dict_response['dominant_emotion'] is None:
         str_response = "Invalid text! Please try again!"
     else:
         # convert the response in a sting with the required format
@@ -39,6 +40,7 @@ def emo_detector():
 
     return str_response
 
+# default route to "/"
 @app.route("/")
 def render_index_page():
     ''' This function initiates the rendering of the main application
@@ -47,6 +49,6 @@ def render_index_page():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    # This functions executes the flask app and deploys it on localhost:5000 
+    # This functions executes the flask app and deploys it on localhost:5000
     app.run(host="0.0.0.0", port=5000)
     

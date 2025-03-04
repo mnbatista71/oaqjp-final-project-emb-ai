@@ -1,5 +1,5 @@
-# TASK 6 - by Mariano Batista
-# Import Flask, render_template, request from the flask pramework package :
+# TASK 7 - by Mariano Batista
+# Import Flask, render_template, request from the flask pramework package:
 from flask import Flask, render_template, request
 
 # Import the emotion_detector function from the package created:
@@ -24,15 +24,18 @@ def emo_detector():
 
     # Pass the text to the sentiment_analyzer function and store the response
     dict_response = emotion_detector(text_to_analyze)
-    
-    # convert the response in a sting with the required format
-    str_response = "For the given statement, the system response is " \
-    + "'anger': " + str(dict_response['anger']) + ", " \
-    + "'disgust': " + str(dict_response['disgust']) + ", " \
-    + "'fear': " + str(dict_response['fear']) + ", " \
-    + "'joy': " + str(dict_response['joy']) + ", " \
-    + "and 'sadness': " + str(dict_response['sadness']) + ". " \
-    + "The dominant emotion is " + str(dict_response['dominant_emotion']) + "."
+    str_response = ""
+    if dict_response['dominant_emotion'] == None:
+        str_response = "Invalid text! Please try again!"
+    else:
+        # convert the response in a sting with the required format
+        str_response = "For the given statement, the system response is " \
+        + "'anger': " + str(dict_response['anger']) + ", " \
+        + "'disgust': " + str(dict_response['disgust']) + ", " \
+        + "'fear': " + str(dict_response['fear']) + ", " \
+        + "'joy': " + str(dict_response['joy']) + ", " \
+        + "and 'sadness': " + str(dict_response['sadness']) + ". " \
+        + "The dominant emotion is " + str(dict_response['dominant_emotion']) + "."
 
     return str_response
 
